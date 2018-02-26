@@ -20,7 +20,8 @@ class TPscene extends CGFscene {
 
         this.axis = new CGFaxis(this);
         this.obj = new MyTable(this);
-        this.leg = new MyLegs(this);
+        this.floor = new MyFloor(this);
+
 
         // NOTE: OpenGL transformation matrices are transposed
 
@@ -72,12 +73,12 @@ class TPscene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-       
 
+
+        this.translate(4,0.05,3);
         this.obj.display();
 
-        this.leg.display();
-       
+        this.floor.display();
         // ---- END Primitive drawing section
 
     };

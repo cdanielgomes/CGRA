@@ -23,8 +23,10 @@ class MyUnitCubeQuad extends CGFobject
 
 		this.scene.pushMatrix();
 		this.scene.translate(0,0,-0.5);
+		this.scene.pushMatrix();
 		this.scene.rotate(cvs*180, 0, 3,0);
 		this.quad.display();//back face
+		this.scene.popMatrix();
 		this.scene.popMatrix();
 
 
