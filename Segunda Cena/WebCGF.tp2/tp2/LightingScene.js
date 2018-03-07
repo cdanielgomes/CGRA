@@ -43,7 +43,7 @@ class LightingScene extends CGFscene
 		this.materialA = new CGFappearance(this);
 		this.materialA.setAmbient(0.3,0.3,0.3,1);
 		this.materialA.setDiffuse(0.6,0.6,0.6,1);
-		this.materialA.setSpecular(0,0.2,0.8,1);
+		this.materialA.setSpecular(0.0,0.2,0.8,1);
 		this.materialA.setShininess(120);
 
 		this.materialB = new CGFappearance(this);
@@ -78,8 +78,8 @@ class LightingScene extends CGFscene
 
 		this.lights[0].setAmbient(0, 0, 0, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-		this.lights[0].setSpecular(1.0,1.0,0,1.0)
-;		this.lights[0].enable();
+		this.lights[0].setSpecular(1.0,1.0,0,1.0);
+		this.lights[0].enable();
 
 		this.lights[1].setAmbient(0, 0, 0, 1);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -87,13 +87,15 @@ class LightingScene extends CGFscene
 
 		this.lights[2].setAmbient(0,0,0,1);
 		this.lights[2].setSpecular(1,1,1,1);
+		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[2].setConstantAttenuation(0);
 		this.lights[2].setLinearAttenuation(1);
 		this.lights[2].setQuadraticAttenuation(0);
 		this.lights[2].enable();
 
 		this.lights[3].setAmbient(0,0,0,1);
-		this.lights[3].setSpecular(1,1,1,1);
+		this.lights[3].setSpecular(1.0,1.0,0,1.0);
+		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[3].setConstantAttenuation(0);
 		this.lights[3].setLinearAttenuation(0);
 		this.lights[3].setQuadraticAttenuation(0.2);
