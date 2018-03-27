@@ -79,8 +79,7 @@ class MyCylinder extends CGFobject {
 
         }
 
-        console.log(this.vertices);
-        console.log(this.indices);
+        
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
 

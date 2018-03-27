@@ -49,12 +49,12 @@ class MyPrism extends CGFobject {
 
         for (let i = 0; i < this.slices * 2 * (this.stacks + 1); i += 2) {
 
-            console.log(i);
+           
 
             if ((i - this.stacks * 2) % ((this.stacks + 1) * 2)  == 0 && i != 0)
                 i += 2;
 
-            console.log(i);
+            
 
             if (i % (this.slices * 2 * (this.stacks + 1)) == 0)
                 this.indices.push(0);
@@ -88,8 +88,7 @@ class MyPrism extends CGFobject {
 
         }
 
-        console.log(this.vertices);
-        console.log(this.indices);
+  
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
 
