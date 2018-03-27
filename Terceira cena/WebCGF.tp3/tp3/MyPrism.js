@@ -16,99 +16,6 @@ class MyPrism extends CGFobject {
 
 
     initBuffers() {
-        //Fraga code
-        /*
-                this.vertices = [
-                ];
-        
-                this.indices = [
-                ];
-        
-                this.normals = [
-                ];
-        
-        
-        
-                //V1 
-                var angulo = Math.PI * 2 / this.slices;
-                var vertice2 = angulo;
-                var vertice = 0;
-                var altura = this.stacks;
-                var indice = 0;
-        
-                for (var s = 0; s < this.stacks; s++) {
-                    for (var i = 0; i <= this.slices; i++) {
-                        //1 vertice
-                        var y = Math.sin(vertice2) * 0.5;
-                        var x = y / Math.tan(vertice2);
-                        var z = s;
-                        this.vertices.push(x);
-                        this.vertices.push(y);
-                        this.vertices.push(z);
-                        //1 Normal
-                        this.normals.push(Math.cos(angulo * (i + 0.5)));
-                        this.normals.push(Math.sin(angulo * (i + 0.5)));
-                        this.normals.push(0);
-                        //2 vertice
-                        var y = Math.sin(vertice) * 0.5;
-                        var x = y / Math.tan(vertice);
-                        var z = s;
-                        this.vertices.push(x);
-                        this.vertices.push(y);
-                        this.vertices.push(z);
-                        //2 Normal
-                        this.normals.push(Math.cos(angulo * (i + 0.5)));
-                        this.normals.push(Math.sin(angulo * (i + 0.5)));
-                        this.normals.push(0);
-                        //3 vertice
-                        var y = Math.sin(vertice2) * 0.5;
-                        var x = y / Math.tan(vertice2);
-                        var z = s + 1;
-                        this.vertices.push(x);
-                        this.vertices.push(y);
-                        this.vertices.push(z);
-                        //3 Normal
-                        this.normals.push(Math.cos(angulo * (i + 0.5)));
-                        this.normals.push(Math.sin(angulo * (i + 0.5)));
-                        this.normals.push(0);
-                        //4 vertice
-                        var y = Math.sin(vertice) * 0.5;
-                        var x = y / Math.tan(vertice);
-                        var z = s + 1;
-                        this.vertices.push(x);
-                        this.vertices.push(y);
-                        this.vertices.push(z);
-                        //4 Normal
-                        this.normals.push(Math.cos(angulo * (i + 0.5)));
-                        this.normals.push(Math.sin(angulo * (i + 0.5)));
-                        this.normals.push(0);
-        
-                        vertice = vertice + angulo;
-                        vertice2 = vertice2 + angulo;
-        
-                        //Indices
-                        this.indices.push(indice);
-                        this.indices.push(indice + 1);
-                        this.indices.push(indice + 2);
-        
-                        this.indices.push(indice + 3);
-                        this.indices.push(indice + 2);
-                        this.indices.push(indice + 1);
-        
-        
-                        this.indices.push(indice + 2);
-                        this.indices.push(indice + 1);
-                        this.indices.push(indice);
-        
-                        this.indices.push(indice + 1);
-                        this.indices.push(indice + 2);
-                        this.indices.push(indice + 3);
-                        indice = indice + 4;
-                    }
-                    vertice2 = angulo;
-                    vertice = 0;
-                }
-        */
         this.vertices = [];
         this.indices = [];
         this.normals = [];
@@ -120,6 +27,7 @@ class MyPrism extends CGFobject {
 
         for (let j = 0; j < this.slices; j++) {
             for (let i = 0; i <= this.stacks; i++) {
+                
                 this.vertices.push(Math.cos(ang * j));
                 this.vertices.push(Math.sin(ang * j));
                 this.vertices.push((1 / this.stacks) * i);
@@ -139,21 +47,38 @@ class MyPrism extends CGFobject {
 
         }
 
-
-
-
-        for (let i = 0; i < this.slices * 2 * (this.stacks); i += 2) {
+        for (let i = 0; i < this.slices * 2 * (this.stacks + 1); i += 2) {
 
             if (i % this.stacks == 0 && i != 0)
                 i += 2;
 
-            this.indices.push(i);
-            this.indices.push(i + 1);
-            this.indices.push(i + 2);
+            if (i % (this.slices * 2 * (this.stacks + 1)) == 0)
+                this.indices.push(0);
+            else
+                this.indices.push(i);
 
-            this.indices.push(i + 3);
-            this.indices.push(i + 2);
-            this.indices.push(i + 1);
+            if ((i + 1) % (this.slices * 2 * (this.stacks + 1) + 1) == 0)
+                this.indices.push(1);
+            else
+                this.indices.push(i + 1);
+
+            if ((i + 2) % (this.slices * 2 * (this.stacks + 1) + 2) == 0)
+                this.indices.push(2);
+            else
+                this.indices.push(i + 2);
+
+            if ((i + 3) % (this.slices * 2 * (this.stacks + 1) + 3) == 0)
+                this.indices.push(3);
+            else
+                this.indices.push(i + 3);
+            if ((i + 2) % (this.slices * 2 * (this.stacks + 1) + 2) == 0)
+                this.indices.push(2);
+            else
+                this.indices.push(i + 2);
+            if ((i + 1) % (this.slices * 2 * (this.stacks + 1) + 1) == 0)
+                this.indices.push(1);
+            else
+                this.indices.push(i + 1);
 
         }
 
