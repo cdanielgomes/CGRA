@@ -28,12 +28,11 @@ class LightingScene extends CGFscene {
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
-		//this.table = new MyTable(this);
+		this.table = new MyTable(this);
 		this.wall = new Plane(this);
-		//this.floor = new MyQuad(this);
+		this.floor = new MyQuad(this);
 
-		//this.prima = new MyPrism(this, 10, 10);
-		this.cil = new MyCylinder(this, 8, 20);
+		this.prima = new MyPrism(this, 8, 20);
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 
@@ -135,13 +134,9 @@ class LightingScene extends CGFscene {
 
 
 		
-		//this.prima.display();
-		//this.translate(4,0,0);
-		this.cil.display();
 		
-		//this.prisma.display();
 		// ---- END Background, camera and axis setup
-		/*
+		
 				// ---- BEGIN Scene drawing section
 		
 				// Floor
@@ -196,7 +191,17 @@ class LightingScene extends CGFscene {
 					this.materialB.apply();
 					this.boardB.display();
 				this.popMatrix();
-		*/
+				
+				//Prism	
+				this.pushMatrix();
+					this.translate(0, 0, -0.5);
+					this.rotate(90 * degToRad, -1, 0, 0);
+					this.scale(1,1,9);
+					this.translate(5, -14, 0);
+					this.prima.display();
+				this.popMatrix();
+
+				
 		// ---- END Scene drawing section
 	};
 };
