@@ -54,6 +54,7 @@ class LightingScene extends CGFscene {
 		this.materialB.setShininess(120);
 
 		// texturas
+	
 		this.floorAppearance = new CGFappearance(this);
 		this.floorAppearance.setTextureWrap("REPEAT", "REPEAT");
 		this.floorAppearance.loadTexture("../resources/images/floor.png");
