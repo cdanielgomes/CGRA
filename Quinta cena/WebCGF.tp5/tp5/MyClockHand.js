@@ -23,11 +23,18 @@ class MyClockHand extends CGFobject {
     };
 
     display() {
+        
         this.scene.pushMatrix();   
-        this.scene.translate(0,0,0.5);
-        this.scene.rotate(90,1,1,1);
-        this.scene.scale(0.7,0.15,0.06);
+        this.scene.translate(0.22,-0.071,0.5);
+        this.scene.pushMatrix();   
+        
+        this.scene.rotate(this.angle,0,0,1);
+        
+        this.scene.pushMatrix();   
+        this.scene.scale(this.height,this.width ,0.06);
         this.ponteiro.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
         this.scene.popMatrix();
     };
 };
