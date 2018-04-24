@@ -82,7 +82,7 @@ class LightingScene extends CGFscene {
 		this.boardAppearance.setSpecular(0.9, 0.9, 0.9, 1);
 		this.boardAppearance.setShininess(120)
 
-
+		this.setUpdatePeriod(100);
 	};
 
 	initCameras() {
@@ -237,5 +237,9 @@ class LightingScene extends CGFscene {
 		this.popMatrix();
 
 		// ---- END Scene drawing section
+	};
+
+	update(currTime){
+			this.clock.update(currTime);
 	};
 };

@@ -5,13 +5,12 @@
 */
 
 class MyClockHand extends CGFobject {
-    constructor(scene, angle, height, width) {
+    constructor(scene, height, width) {
         super(scene);
         this.ponteiro = new MyUnitCubeQuad(this.scene);
-        this.angle = angle;
         this.height = height;
         this.width = width;
-
+        this.angle = 0;
     };
 
     setAngle(angle) {
@@ -23,18 +22,11 @@ class MyClockHand extends CGFobject {
     };
 
     display() {
-        
-        this.scene.pushMatrix();   
-        this.scene.translate(0.22,-0.071,0.5);
-        this.scene.pushMatrix();   
-        
-        this.scene.rotate(this.angle,0,0,1);
-        
-        this.scene.pushMatrix();   
-        this.scene.scale(this.height,this.width ,0.06);
+        this.scene.pushMatrix();
+        this.scene.rotate(this.angle, 0, 0, 1);
+        this.scene.scale(this.width, this.height, 0.1);
+        this.scene.translate(0.2, 0.5, 0);
         this.ponteiro.display();
-        this.scene.popMatrix();
-        this.scene.popMatrix();
         this.scene.popMatrix();
     };
 };
