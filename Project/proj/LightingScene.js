@@ -30,12 +30,10 @@ class LightingScene extends CGFscene {
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
-		
+
 		this.vehicle = new MyVehicle(this);
-		this.floor = new MyQuad(this, 0, 10, 0, 12);
-		this.boardA = new Plane(this, 0, 1, 0.1, 0.8, BOARD_A_DIVISIONS);
-		this.boardB = new Plane(this, 0, 1, 0, 1, BOARD_B_DIVISIONS);
-	
+		this.floor = new MyTerrain(this, 1, 2);
+
 
 		// Materials
 		this.materialDefault = new CGFappearance(this);
@@ -52,34 +50,6 @@ class LightingScene extends CGFscene {
 		this.materialB.setSpecular(0.8, 0.8, 0.8, 1);
 		this.materialB.setShininess(120);
 
-		// texturas
-	
-		this.floorAppearance = new CGFappearance(this);
-		this.floorAppearance.setTextureWrap("REPEAT", "REPEAT");
-		this.floorAppearance.loadTexture("../resources/images/floor.png");
-		
-		this.windowAppearance = new CGFappearance(this);
-		this.windowAppearance.loadTexture("../resources/images/window.png");
-		this.windowAppearance.setTextureWrap("CLAMP_TO_EDGE", "CLAMP_TO_EDGE");
-	
-
-		this.tableAppearance = new CGFappearance(this);
-		this.tableAppearance.loadTexture("../resources/images/table.png");
-		this.tableAppearance.setDiffuse(0.8, 0.8, 0.8, 1);
-		this.tableAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-		this.tableAppearance.setShininess(10);
-
-		this.slidesAppearance = new CGFappearance(this);
-		this.slidesAppearance.loadTexture("../resources/images/slides.png");
-		this.slidesAppearance.setDiffuse(0.8, 0.8, 0.8, 1);
-		this.slidesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-		this.slidesAppearance.setShininess(10);
-		
-		this.boardAppearance = new CGFappearance(this);
-		this.boardAppearance.loadTexture("../resources/images/board.png");
-		this.boardAppearance.setDiffuse(0.6, 0.6, 0.6, 1);
-		this.boardAppearance.setSpecular(0.9, 0.9, 0.9, 1);
-		this.boardAppearance.setShininess(120)
 
 		this.setUpdatePeriod(100);
 	};
@@ -159,7 +129,7 @@ class LightingScene extends CGFscene {
 		this.updateLights();
 
 		// Draw axis
-		this.axis.display();
+	//	this.axis.display();
 
 		this.materialDefault.apply();
 
@@ -170,10 +140,10 @@ class LightingScene extends CGFscene {
 		// ---- BEGIN Scene drawing section
 
 		this.vehicle.display();
-
+		this.floor.display();
 
 		// ---- END Scene drawing section
 	};
 
-	
+
 };
