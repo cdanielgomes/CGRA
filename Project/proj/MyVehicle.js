@@ -11,6 +11,8 @@ class MyVehicle extends CGFobject {
 
         this.tronco = new MyUnitCubeQuad(scene);
         this.wheel = new MyWheel(scene);
+        this.color = new CGFappearance(this.scene);
+        this.color.setDiffuse(0.5,0.5,0.5,1);
 
     }
 
@@ -59,9 +61,12 @@ class MyVehicle extends CGFobject {
         this.scene.pushMatrix();
         //this.scene.rotate(0.25 * Math.PI, 0, 0, 3);
         // queria so meter o cubo entre as rodas
+        this.color.apply();
+
         this.tronco.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
+
     }
 }
