@@ -13,6 +13,7 @@ class MyCar extends CGFobject {
 
     }
     update() {
+        console.log("speed = " + this.speed + " - " + "ang = " +this.wheelsAngle + "\n\n");
         this.car.update(this.speed, this.wheelsAngle);
     }
     display() {
@@ -23,10 +24,12 @@ class MyCar extends CGFobject {
     moveForward() {
         this.speed += 1;
         this.update();
+
     }
     moveBack() {
         this.speed -= 1;
         this.update();
+       
     }
 
     moveRight() {
@@ -37,7 +40,6 @@ class MyCar extends CGFobject {
     }
 
     moveLeft() {
-
         this.wheelsAngle -= Math.PI / 12;
         if (this.wheelsAngle < Math.PI / 6)
             this.wheelsAngle = -Math.PI / 6;

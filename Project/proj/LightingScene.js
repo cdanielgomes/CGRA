@@ -191,15 +191,19 @@ class LightingScene extends CGFscene {
 		var keysPressed = false;
 		if (this.gui.isKeyPressed("KeyW")) {
 			this.vehicle. moveForward();
+			
 		}
 		if (this.gui.isKeyPressed("KeyS")) {
 			this.vehicle.moveBack();
+		
 		}
 		if (this.gui.isKeyPressed("KeyA")) {
 			this.vehicle.moveRight();
+			
 		}
 		if (this.gui.isKeyPressed("KeyD")) {
 			this.vehicle.moveLeft();
+			
 		}
 	}
 
