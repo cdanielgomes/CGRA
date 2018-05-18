@@ -90,13 +90,19 @@ class MyVehicle extends CGFobject {
 
 
     }
+    
+    updateAllwheels(speed, angle){
+        this.leftWheel.setAngulo(speed * 0.5, angle);
+        this.rightWheel.setAngulo(speed * 0.5, angle);
+        this.wheel.setAngulo(speed * 0.5, 0);
+        
+    }
 
-    update(speed) {
+    update(speed, angle) {
 
         this.x += speed * 0.2;
         //this.y += speed * 0.2;
-        this.leftWheel.setAngulo(speed * 0.5);
-        this.rightWheel.setAngulo(speed * 0.5)
-        this.wheel.setAngulo(speed * 0.5);
+        this.updateAllwheels(speed, angle);
+    
     }
 }
