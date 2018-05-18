@@ -18,17 +18,19 @@ class MyWheel extends CGFobject {
         this.raid.loadTexture("../resources/images/raid.png");
     }
 
-    display(){
-        
-        
+    display() {
+
+
         this.tire.apply();
         this.wheel.display();
-        
+
         this.raid.apply();
         this.top.display();
 
         this.scene.pushMatrix();
-        this.scene.translate(0,0,2);
+        this.scene.translate(0, 0, 2);
         this.scene.popMatrix();
+
     }
+
 }

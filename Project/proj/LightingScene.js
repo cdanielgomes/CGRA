@@ -138,7 +138,7 @@ class LightingScene extends CGFscene {
 			this.lights[3].disable();
 
 
-		if (this.Axis) {
+		if (!this.Axis) {
 			this.axis.display();
 		}
 
@@ -177,7 +177,7 @@ class LightingScene extends CGFscene {
 		// ---- BEGIN Scene drawing section
 
 		this.vehicle.display();
-		this.floor.display();
+	//	this.floor.display();
 
 		// ---- END Scene drawing section
 	};
