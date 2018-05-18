@@ -8,7 +8,7 @@ class MyWheel extends CGFobject {
 
     constructor(scene) {
         super(scene);
-
+        this.angulo = 0;
         this.wheel = new MyCylinder(scene, 20, 20);
         this.top = new MyTop(this.scene, 20);
         this.top.initBuffers();
@@ -22,15 +22,20 @@ class MyWheel extends CGFobject {
 
 
         this.tire.apply();
-        this.wheel.display();
-
         this.raid.apply();
-        this.top.display();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 2);
+        this.scene.rotate(this.angulo, 0, 0, 2);
+        this.wheel.display();
+        this.top.display();
+
         this.scene.popMatrix();
 
+        console.log(this.angulo);
+    }
+
+    setAngulo(angulo){
+        this.angulo += angulo;
     }
 
 }

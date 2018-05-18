@@ -12,7 +12,7 @@ class MyVehicle extends CGFobject {
         this.rightWheel = new MyWheel(scene);
         this.leftWheel = new MyWheel(scene);
         this.wheel = new MyWheel(scene);
-        this.testWheel = new MyWheel(scene);
+
         //car controllers
         this.x = 0;
         this.y = 0;
@@ -37,23 +37,19 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(Math.PI, 0, 2, 0);
         this.scene.pushMatrix();
         this.scene.translate(2.5 + this.x * 2, 1, 2 + this.y);
-        this.scene.pushMatrix();
-        this.scene.rotate(this.angulo, 0, 0, 2);
+
         this.rightWheel.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
-        this.scene.popMatrix();
+
         //another 
 
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
         this.scene.pushMatrix();
         this.scene.translate(-2.5 - this.x * 2, 1, 2 + this.y);
-        this.scene.pushMatrix();
-        this.scene.rotate(this.angulo, 0, 0, 2);
         this.leftWheel.display();
-        this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
         //back
@@ -65,26 +61,20 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(Math.PI, 0, 2, 0);
         this.scene.pushMatrix();
         this.scene.translate(-2 + this.x * 2, 1, 2 + this.y);
-        this.scene.pushMatrix();
-        this.scene.rotate(this.angulo, 0, 0, 2);
         this.wheel.display();
-        this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
 
-         //another 
+        //another 
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
         this.scene.pushMatrix();
         this.scene.translate(2 - this.x * 2, 1, 2 + this.y);
-        this.scene.pushMatrix();
-        this.scene.rotate(this.angulo, 0, 0, 2);
         this.wheel.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
-        this.scene.popMatrix();
-       
+
         //tronco
         this.scene.pushMatrix();
         this.scene.translate(0 - this.x, 0.5, 0 + this.y);
@@ -105,12 +95,8 @@ class MyVehicle extends CGFobject {
 
         this.x += speed * 0.2;
         //this.y += speed * 0.2;
-
-        this.a = 0;
-        this.b = 0;
-        this.c = 1;
-
-        this.angulo += speed*0.5;
-
+        this.leftWheel.setAngulo(speed * 0.5);
+        this.rightWheel.setAngulo(speed * 0.5)
+        this.wheel.setAngulo(speed * 0.5);
     }
 }
