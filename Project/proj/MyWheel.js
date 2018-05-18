@@ -20,7 +20,7 @@ class MyWheel extends CGFobject {
 
     display(){
         
-        this.
+        
         this.tire.apply();
         this.wheel.display();
         

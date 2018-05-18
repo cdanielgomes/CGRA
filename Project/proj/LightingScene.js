@@ -27,11 +27,19 @@ class LightingScene extends CGFscene {
 		this.gl.enable(this.gl.CULL_FACE);
 		this.gl.depthFunc(this.gl.LEQUAL);
 
+		this.Light1 = true;
+		this.Light2 = true;
+		this.Light3 = true;
+		this.Light4 = true;
+		this.speed = 3;
+
+		this.Axis = false;
+
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
 
-		this.vehicle = new MyVehicle(this);
+		this.vehicle = new MyCar(this);
 		this.floor = new MyTerrain(this, 1, 2);
 
 
@@ -52,6 +60,7 @@ class LightingScene extends CGFscene {
 
 
 		this.setUpdatePeriod(100);
+		
 	};
 
 	initCameras() {
@@ -106,7 +115,35 @@ class LightingScene extends CGFscene {
 	updateLights() {
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
+
+		if (this.Light1)
+			this.lights[0].enable();
+		else
+			this.lights[0].disable();
+
+
+		if (this.Light2)
+			this.lights[1].enable();
+		else
+			this.lights[1].disable();
+
+		if (this.Light3)
+			this.lights[2].enable();
+		else
+			this.lights[2].disable();
+
+		if (this.Light4)
+			this.lights[3].enable();
+		else
+			this.lights[3].disable();
+
+
+		if (this.Axis) {
+			this.axis.display();
+		}
+
 	}
+
 
 	display() {
 
@@ -129,7 +166,7 @@ class LightingScene extends CGFscene {
 		this.updateLights();
 
 		// Draw axis
-	//	this.axis.display();
+		//	
 
 		this.materialDefault.apply();
 
@@ -145,5 +182,27 @@ class LightingScene extends CGFscene {
 		// ---- END Scene drawing section
 	};
 
+	doSomething() {
+		console.log("Doing something...");
+	};
+
+	checkKeys() {
+		var text = "Keys pressed: ";
+		var keysPressed = false;
+		if (this.gui.isKeyPressed("KeyW")) {
+			this.vehicle. moveForward();
+		}
+		if (this.gui.isKeyPressed("KeyS")) {
+			this.vehicle.moveBack();
+		}
+		if (keysPressed)
+			console.log(text);
+	}
+
+
+	update(){
+		this.checkKeys();
+		this.vehicle.update();
+	}
 
 };
