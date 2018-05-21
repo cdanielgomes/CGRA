@@ -31,17 +31,17 @@ class MyCylinder extends CGFobject {
                 this.vertices.push(Math.cos(ang * j));
                 this.vertices.push(Math.sin(ang * j));
                 this.vertices.push((1 / this.stacks) * i);
-                
-                this.vertices.push(Math.cos(ang * (j+1)));
-                this.vertices.push(Math.sin(ang * (j+1)));
+
+                this.vertices.push(Math.cos(ang * (j + 1)));
+                this.vertices.push(Math.sin(ang * (j + 1)));
                 this.vertices.push((1 / this.stacks) * i);
-                
+
 
                 this.normals.push((Math.cos(ang * j)));
                 this.normals.push((Math.sin(ang * j)));
                 this.normals.push(0);
-                this.normals.push(Math.cos(ang * (j+1)));
-                this.normals.push(Math.sin(ang * (j+1)));
+                this.normals.push(Math.cos(ang * (j + 1)));
+                this.normals.push(Math.sin(ang * (j + 1)));
                 this.normals.push(0);
 
             }
@@ -83,11 +83,14 @@ class MyCylinder extends CGFobject {
             else
                 this.indices.push(i + 1);
 
+
         }
+
 
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
+    
 
     };
 };

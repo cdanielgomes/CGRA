@@ -13,9 +13,7 @@ class MyCar extends CGFobject {
 
     }
     update() {
-        console.log(this.wheelsAngle);
-
-        this.car.update(this.speed, this.wheelsAngle);
+       this.car.update(this.speed, this.wheelsAngle);
     }
     display() {
         this.car.display();

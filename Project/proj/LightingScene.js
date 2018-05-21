@@ -46,7 +46,7 @@ class LightingScene extends CGFscene {
 		];
 
 		this.axis = new CGFaxis(this);
-
+		this.crane = new MyCrane(this);
 		// Scene elements
 
 		this.vehicle = new MyCar(this);
@@ -180,15 +180,16 @@ class LightingScene extends CGFscene {
 
 		this.materialDefault.apply();
 
-
+		this.crane.display();
 
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
 
-		this.vehicle.display();
+			this.vehicle.display();
 		this.floor.display();
 
+	
 		// ---- END Scene drawing section
 	};
 
