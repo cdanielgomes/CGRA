@@ -22,13 +22,11 @@ class MyVehicle extends CGFobject {
         this.y = 0;
         this.z = 0;
         this.angulo = 0;
-        //wheels rotation
-        this.a = 2;
-        this.b = 2;
-        this.c = 3;
 
         this.pissas = 0;
 
+        this.xrot = 0;
+        this.zrot = 0;
         this.color = new CGFappearance(this.scene);
         //   this.color.setDiffuse(0.5, 0.5, 0.5, 1);
 
@@ -38,23 +36,21 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.rotate(this.pissas, 0, 1, 0);
-
+        this.scene.translate(-1.2 , 0, 0); 
+        
+        //tronco
         this.scene.pushMatrix();
-        this.scene.translate(-1.4, 0, 0);
+        this.scene.translate(0 - this.x, 0.5, 0 + this.y);
+        this.scene.pushMatrix();
+        this.scene.scale(4, 1.2, 2);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0.3, 0);
+        this.color.apply();
+        this.tronco.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
 
-          //tronco
-          this.scene.pushMatrix();
-          this.scene.translate(0 - this.x, 0.5, 0 + this.y);
-          this.scene.pushMatrix();
-          this.scene.scale(4, 1.2, 2);
-          this.scene.pushMatrix();
-          this.scene.translate(0, 0.3, 0);
-          this.color.apply();
-          this.tronco.display();
-          this.scene.popMatrix();
-          this.scene.popMatrix();
-          this.scene.popMatrix();
-  
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
         this.scene.pushMatrix();
@@ -94,10 +90,8 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
-      
         this.scene.popMatrix();
-
-        this.scene.popMatrix();
+     
 
     }
 
@@ -109,11 +103,12 @@ class MyVehicle extends CGFobject {
     }
 
     update(speed, angle) {
-        console.log("x = " + this.x + " - y = " + this.y);
         this.updateAllwheels(speed, angle);
         this.pissas += angle * speed * 0.2;
-        this.x += speed * 0.2*Math.cos(angle);
-        this.y += speed * 0.2*Math.sin(angle);
+        this.x += speed * 0.2 * Math.cos(angle);
+        this.y += speed * 0.2 * Math.sin(angle);
+        this.xrot += speed * 0.2;
+        this.zrot += speed * 0.2;
     }
 
     setLeft(bool) {

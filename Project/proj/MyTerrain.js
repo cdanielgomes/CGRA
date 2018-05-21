@@ -6,7 +6,7 @@
 
 class MyTerrain extends Plane {
 
-    constructor(scene, nrDivs, altemetry) {
+    constructor(scene, nrDivs, altimetry) {
         super(scene, 0, 10, 0, 10, nrDivs);
 
         this.floorAppearence = new CGFappearance(this.scene);
@@ -19,7 +19,9 @@ class MyTerrain extends Plane {
 
         this.floorAppearence.loadTexture("../resources/images/floor.png");
 
-        this.altemetry = altemetry;
+        this.altimetry = altimetry;
+        this.applyAltimetry();
+        
     }
 
 
@@ -35,7 +37,21 @@ class MyTerrain extends Plane {
         this.scene.popMatrix();
     }
 
+    applyAltimetry() {
 
+		let count = 2;
+
+		for(let i = 0; i < this.nrDivs; i++){
+
+			for(let j = 0; j < this.nrDivs; j++){
+
+				this.vertices[count] = this.altimetry[i][j];
+				count += 3;
+			}
+		}
+
+		super.initGLBuffers();
+	}
 }
 
 

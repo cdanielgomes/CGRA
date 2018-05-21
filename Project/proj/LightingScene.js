@@ -34,13 +34,23 @@ class LightingScene extends CGFscene {
 		this.speed = 3;
 
 		this.Axis = false;
+		this.altimetry = [[2.0, 3.0, 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0],
+		[2.0, 3.0, 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0],
+		[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+		[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+		[0.0, 0.0, 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0],
+		[0.0, 0.0, 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0],
+		[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+		[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+		[2.0, 3.0, 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0]
+		];
 
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
 
 		this.vehicle = new MyCar(this);
-		this.floor = new MyTerrain(this, 1, 2);
+		this.floor = new MyTerrain(this, 8, this.altimetry);
 
 
 		// Materials
@@ -60,7 +70,7 @@ class LightingScene extends CGFscene {
 
 
 		this.setUpdatePeriod(100);
-		
+
 	};
 
 	initCameras() {
@@ -177,7 +187,7 @@ class LightingScene extends CGFscene {
 		// ---- BEGIN Scene drawing section
 
 		this.vehicle.display();
-	//	this.floor.display();
+		this.floor.display();
 
 		// ---- END Scene drawing section
 	};
@@ -190,25 +200,26 @@ class LightingScene extends CGFscene {
 		var text = "Keys pressed: ";
 		var keysPressed = false;
 		if (this.gui.isKeyPressed("KeyW")) {
-			this.vehicle. moveForward();
-			
+			this.vehicle.moveForward();
+
 		}
 		if (this.gui.isKeyPressed("KeyS")) {
 			this.vehicle.moveBack();
-		
+
 		}
 		if (this.gui.isKeyPressed("KeyA")) {
-			this.vehicle.moveRight();
-			
+			this.vehicle.moveLeft();
+
+
 		}
 		if (this.gui.isKeyPressed("KeyD")) {
-			this.vehicle.moveLeft();
-			
+
+			this.vehicle.moveRight();
 		}
 	}
 
 
-	update(){
+	update() {
 		this.checkKeys();
 		this.vehicle.update();
 	}
