@@ -25,22 +25,26 @@ class MyWheel extends CGFobject {
         this.tire.apply();
         this.raid.apply();
 
+        
         this.scene.pushMatrix();
-        this.scene.rotate(this.angle, 0, 2, 0);
+        this.scene.rotate(this.angle, 0, 1, 0);
         this.scene.pushMatrix();
-        this.scene.rotate(this.angulo, 0, 0, 2);
+        this.scene.rotate(this.angulo, 0, 0, 1);
         this.scene.pushMatrix();
-        this.scene.translate(0,0,-0.5);
+        this.scene.translate(0, 0, -0.5);
+             this.scene.pushMatrix();
+        this.scene.scale(0.5,0.5,0.5);
         this.wheel.display();
         this.top.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
-    
-        
+        this.scene.popMatrix();
+
+
     }
 
-    setAngulo(angulo, angle){
+    setAngulo(angulo, angle) {
         this.angulo += angulo;
         this.angle = angle;
     }

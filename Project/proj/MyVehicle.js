@@ -33,11 +33,13 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
-
+        this.scene.pushMatrix();
+        this.scene.translate(-1.2, 0, 0);
         this.scene.pushMatrix();
         this.scene.rotate(this.pissas, 0, 1, 0);
-        this.scene.translate(-1.2 , 0, 0); 
-        
+
+      
+
         //tronco
         this.scene.pushMatrix();
         this.scene.translate(0 - this.x, 0.5, 0 + this.y);
@@ -51,60 +53,60 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
+        //direita
+
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
-        this.scene.pushMatrix();
-        this.scene.translate(-2.5 - this.x * 2, 1, -2 + this.y * 2);
+        this.scene.translate(-2.5 - this.x, 1, -2 + this.y);
 
         this.rightWheel.display();
         this.scene.popMatrix();
-        this.scene.popMatrix();
 
-        //another 
+
+
+        //esquerda
 
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
-        this.scene.pushMatrix();
-        this.scene.translate(-2.5 - this.x * 2, 1, 2 + this.y * 2);
+        this.scene.translate(-2.5 - this.x, 1, 2 + this.y);
+
         this.leftWheel.display();
         this.scene.popMatrix();
-        this.scene.popMatrix();
-        //back
 
 
+
+
+
+
+        //roda de tras
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
+        this.scene.translate(2 - this.x, 1, -2 + this.y);
 
-        this.scene.pushMatrix();
-        this.scene.translate(2 - this.x * 2, 1, -2 + this.y * 2);
         this.wheel.display();
         this.scene.popMatrix();
-        this.scene.popMatrix();
 
-        //another 
+
+        //roda de tras 
+
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
-        this.scene.pushMatrix();
-        this.scene.translate(2 - this.x * 2, 1, 2 + this.y * 2);
+        this.scene.translate(2 - this.x, 1, 2 + this.y);
         this.wheel2.display();
         this.scene.popMatrix();
-        this.scene.popMatrix();
+
 
         this.scene.popMatrix();
-     
-
+        this.scene.popMatrix();
     }
 
     updateAllwheels(speed, angle) {
         this.leftWheel.setAngulo(speed * 0.5, angle);
         this.rightWheel.setAngulo(speed * 0.5, angle);
         this.wheel.setAngulo(speed * 0.5, 0);
+        this.wheel2.setAngulo(speed * 0.5, 0);
 
     }
 
     update(speed, angle) {
         this.updateAllwheels(speed, angle);
-        this.pissas += angle * speed * 0.2;
+        this.pissas += angle * speed/7;
         this.x += speed * 0.2 * Math.cos(angle);
         this.y += speed * 0.2 * Math.sin(angle);
         this.xrot += speed * 0.2;

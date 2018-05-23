@@ -180,13 +180,13 @@ class LightingScene extends CGFscene {
 
 		this.materialDefault.apply();
 
-		this.crane.display();
+	//	this.crane.display();
 
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
 
-	//	this.vehicle.display();
+		this.vehicle.display();
 	//	this.floor.display();
 
 	
