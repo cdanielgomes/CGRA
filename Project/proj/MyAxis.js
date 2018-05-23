@@ -11,13 +11,14 @@ class MyAxis extends CGFobject {
         this.axi = new MyCylinderClosed(scene, slices, stacks);
         this.top = new MyTop(scene, slices);
         this.top2 = new MyTop(scene, slices);
+      
+        this.rotation = rotation;
         this.top.initBuffers();
         this.top2.initBuffers();
-        this.rotation = rotation;
+        
     }
 
     display() {
-
         this.scene.pushMatrix();
         this.scene.scale(0.7, 0.7, 0.7);
         this.scene.pushMatrix();
@@ -25,6 +26,8 @@ class MyAxis extends CGFobject {
         this.axi.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
-  
+     
+
     }
+
 }

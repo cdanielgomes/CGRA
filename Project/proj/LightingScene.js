@@ -186,8 +186,8 @@ class LightingScene extends CGFscene {
 
 		// ---- BEGIN Scene drawing section
 
-			this.vehicle.display();
-		this.floor.display();
+	//	this.vehicle.display();
+	//	this.floor.display();
 
 	
 		// ---- END Scene drawing section
