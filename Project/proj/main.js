@@ -21,6 +21,7 @@ serialInclude([
 	'MyCylinderClosed.js',
 	'MySemi.js',
 	'MySemisphere.js',
+	'MyPrismClosed.js',
 	
 	main=function() {
 		var app = new CGFapplication(document.body);

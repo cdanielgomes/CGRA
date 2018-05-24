@@ -7,29 +7,69 @@
 class MyCar extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.car = new MyVehicle(this.scene);
+        this.car = new MyVehicle(scene);
+        this.crane = new MyCrane(scene);
         this.speed = 0;
         this.wheelsAngle = 0;
         this.turning = false;
-
+        this.carSpot = false;
+        this.gotCar = false;
+        this.CraneAxisAngle = 0;
+        this.CraneBaseAngle = 0;
     }
-    update() {
 
-        if (!this.turning & this.speed != 0) {
-            if (this.wheelsAngle > 0)
-                this.wheelsAngle -= Math.PI / 12;
-            else if (this.wheelsAngle < 0)
-                this.wheelsAngle += Math.PI / 12;
 
+    craneUpdate() {
+
+        if (this.CraneAxisAngle < Math.PI / 4 && !this.gotCar) {
+            this.CraneAxisAngle += Math.PI / 32;
+
+            if (this.CraneAxisAngle == Math.PI / 4) {
+                this.gotCar = true;
+            }
         }
 
-        this.turning = false;
-        this.car.update(this.speed, this.wheelsAngle);
-console.log(this.wheelsAngle);
+        if (this.gotCar) {
+            if (this.CraneAxisAngle > 0)
+                this.CraneAxisAngle -= Math.PI / 32;
+        }
+
+        if (this.CraneBaseAngle < Math.PI && this.gotCar && this.CraneAxisAngle == 0)
+            this.CraneBaseAngle += Math.PI / 36;
+
+
+
+        this.crane.setAngle(this.CraneBaseAngle, this.CraneAxisAngle);
+
+
+    }
+
+    update() {
+
+        if (this.carSpot) {
+            this.craneUpdate();
+        }
+        else {
+            if (!this.turning & this.speed != 0) {
+                if (this.wheelsAngle > 0)
+                    this.wheelsAngle -= Math.PI / 12;
+                else if (this.wheelsAngle < 0)
+                    this.wheelsAngle += Math.PI / 12;
+
+            }
+
+            this.turning = false;
+            this.car.update(this.speed, this.wheelsAngle);
+        }
+
 
     }
     display() {
         this.car.display();
+        this.scene.pushMatrix();
+        this.scene.translate(10, 0, 10);
+        this.crane.display();
+        this.scene.popMatrix();
     }
 
 

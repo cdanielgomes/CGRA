@@ -13,23 +13,19 @@ class MyCrane extends CGFobject {
         this.axis = new MyAxis(scene, 20, 20, [0, 1, 0]);
         this.iman = new MyCylinderClosed(scene, 20, 20);
         this.linha = new MyCylinderClosed(scene, 20, 20);
-        this.tronco1 = new MyPrism(scene, 4, 20);
-        this.tronco2 = new MyPrism(scene, 4, 20);
-        this.axisAngle = Math.PI / 7;
-        this.baseAngle = Math.PI;
+        this.tronco1 = new MyPrismClosed(scene, 4, 20);
+        this.tronco2 = new MyPrismClosed(scene, 4, 20);
+        this.axisAngle = 0;
+        this.baseAngle = 0;
     }
 
     display() {
 
         this.scene.pushMatrix();
         this.scene.rotate(this.baseAngle, 0,1,0);
-        this.scene.pushMatrix();
-        this.scene.translate(0, 0.5, 0.2);
+   
         this.base.display();
-        this.scene.popMatrix();
-
-
-
+  
 
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI / 3, 1, 0, 0);
@@ -92,7 +88,8 @@ class MyCrane extends CGFobject {
 
 
     setAngle(baseAngle, axisAngle) {
-        this.baseAngle += baseAngle;
-        this.axisAngle += axisAngle;
+        this.baseAngle = baseAngle;
+        this.axisAngle = axisAngle;
     }
+
 }
