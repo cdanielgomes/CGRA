@@ -22,6 +22,7 @@ serialInclude([
 	'MySemi.js',
 	'MySemisphere.js',
 	'MyPrismClosed.js',
+	'MyTrapezio.js',
 	
 	main=function() {
 		var app = new CGFapplication(document.body);

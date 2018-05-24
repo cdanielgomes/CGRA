@@ -51,7 +51,7 @@ class LightingScene extends CGFscene {
 
 		this.vehicle = new MyCar(this);
 		this.floor = new MyTerrain(this, 8, this.altimetry);
-		this.test = new MyPrismClosed(this, 4, 4);
+		this.test = new MyTrapezio(this, 3, 1, 2);
 
 		// Materials
 		this.materialDefault = new CGFappearance(this);
@@ -186,12 +186,12 @@ class LightingScene extends CGFscene {
 
 		// ---- BEGIN Scene drawing section
 
-		this.vehicle.display();
+		//this.vehicle.display();
 
 
 		//	this.floor.display();
 
-		//this.test.display();
+		this.test.display();
 		// ---- END Scene drawing section
 	};
 

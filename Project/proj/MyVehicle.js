@@ -53,7 +53,6 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
 
-
         //esquerda
 
         this.scene.pushMatrix();
