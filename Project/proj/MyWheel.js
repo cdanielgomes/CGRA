@@ -10,9 +10,7 @@ class MyWheel extends CGFobject {
         super(scene);
         this.angulo = 0;
         this.angle = 0;
-        this.wheel = new MyCylinder(scene, 20, 20);
-        this.top = new MyTop(this.scene, 20);
-        this.top.initBuffers();
+        this.wheel = new MyCylinderClosed(scene, 20, 20);
         this.tire = new CGFappearance(this.scene);
         this.tire.loadTexture("../resources/images/tire.png");
         this.raid = new CGFappearance(this.scene);
@@ -22,20 +20,16 @@ class MyWheel extends CGFobject {
     display() {
 
 
-        this.tire.apply();
         this.raid.apply();
-
-        
         this.scene.pushMatrix();
         this.scene.rotate(this.angle, 0, 1, 0);
         this.scene.pushMatrix();
         this.scene.rotate(this.angulo, 0, 0, 1);
         this.scene.pushMatrix();
         this.scene.translate(0, 0, -0.5);
-             this.scene.pushMatrix();
-        this.scene.scale(0.5,0.5,0.5);
+        this.scene.pushMatrix();
+        this.scene.scale(0.5, 0.5, 0.5);
         this.wheel.display();
-        this.top.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();

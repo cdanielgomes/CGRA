@@ -9,12 +9,8 @@ class MyAxis extends CGFobject {
     constructor(scene, slices, stacks, rotation) {
         super(scene);
         this.axi = new MyCylinderClosed(scene, slices, stacks);
-        this.top = new MyTop(scene, slices);
-        this.top2 = new MyTop(scene, slices);
-      
         this.rotation = rotation;
-        this.top.initBuffers();
-        this.top2.initBuffers();
+  
         
     }
 
