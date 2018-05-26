@@ -10,6 +10,7 @@ class MyCar extends CGFobject {
         this.car = new MyVehicle(scene);
         this.crane = new MyCrane(scene);
         this.speed = 0;
+        this.rotationspeed = 0;
         this.wheelsAngle = 0;
         this.turning = false;
         this.carSpot = false;
@@ -59,7 +60,7 @@ class MyCar extends CGFobject {
             }
 
             this.turning = false;
-            this.car.update(this.speed, this.wheelsAngle);
+            this.car.update(this.speed, this.wheelsAngle, this.rotationspeed);
 
             if(this.speed > 0){
                 this.speed -= 0.0025;
@@ -80,19 +81,23 @@ class MyCar extends CGFobject {
 
 
     moveForward() {
-        this.speed += 0.01;
+        if(this.speed < 0.35){
+            this.speed += 0.01;
+        }
         this.update();
 
     }
     moveBack() {
-        this.speed -= 0.01;
+        if(this.speed > -0.35){
+            this.speed -= 0.01;
+        }
         this.update();
 
     }
 
 
     moveRight() {
-        this.wheelsAngle -= Math.PI / 12;
+        this.wheelsAngle -= Math.PI /12;
         if (this.wheelsAngle < -Math.PI / 6)
             this.wheelsAngle = -Math.PI / 6;
         this.turning = true;
@@ -103,7 +108,12 @@ class MyCar extends CGFobject {
         if (this.wheelsAngle > Math.PI / 6)
             this.wheelsAngle = Math.PI / 6;
         this.turning = true;
+        
 
+    }
+
+    defaultMove(){
+        this.turning = false;
     }
 
 

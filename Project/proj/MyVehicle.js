@@ -15,11 +15,9 @@ class MyVehicle extends CGFobject {
         this.wheel2 = new MyWheel(scene);
         //car controllers
         this.x = 0;
-        this.y = 0;
         this.z = 0;
-        this.angulo = 0;
-
-        this.pissas = 0;
+        this.angulo = -Math.PI/2;
+        this.rotacao = 0;
         this.color = new CGFappearance(this.scene);
         //   this.color.setDiffuse(0.5, 0.5, 0.5, 1);
 
@@ -29,14 +27,20 @@ class MyVehicle extends CGFobject {
 
         var deg = Math.PI / 180;
 
+        
+
         this.scene.pushMatrix();
-        this.scene.translate(-1.2, 0, 0);
+        this.scene.translate(-this.x,0,this.z);
+        this.scene.translate(2.0, 0, 0);
+        this.scene.rotate(this.rotacao, 0, 1, 0);
+        this.scene.translate(-2.0, 0, 0);
         this.scene.pushMatrix();
-        this.scene.rotate(this.pissas, 0, 1, 0);
+
+        
 
         //tronco
         this.scene.pushMatrix();
-        this.scene.translate(0 - this.x, 0.5, 0 + this.y);
+        this.scene.translate(0, 0.5, 0);
         this.scene.rotate(180*deg, 0, 1, 0)
         this.color.apply();
         this.tronco.display();
@@ -46,7 +50,7 @@ class MyVehicle extends CGFobject {
         //direita
 
         this.scene.pushMatrix();
-        this.scene.translate(-2.3 - this.x, 0.5,-0.7 + this.y);
+        this.scene.translate(-2.3, 0.5,-0.7);
 
         this.rightWheel.display();
         this.scene.popMatrix();
@@ -55,7 +59,7 @@ class MyVehicle extends CGFobject {
         //esquerda
 
         this.scene.pushMatrix();
-        this.scene.translate(-2.3 - this.x, 0.5, 1.2 + this.y);
+        this.scene.translate(-2.3, 0.5, 1.2);
 
         this.leftWheel.display();
         this.scene.popMatrix();
@@ -63,8 +67,7 @@ class MyVehicle extends CGFobject {
 
         //roda de tras
         this.scene.pushMatrix();
-        this.scene.translate(1.9 - this.x, 0.5, -0.7 + this.y);
-
+        this.scene.translate(1.9, 0.5, -0.7);
         this.wheel.display();
         this.scene.popMatrix();
 
@@ -72,7 +75,7 @@ class MyVehicle extends CGFobject {
         //roda de tras 
 
         this.scene.pushMatrix();
-        this.scene.translate(1.9 - this.x, 0.5, 1.2 + this.y);
+        this.scene.translate(1.9, 0.5, 1.2);
         this.wheel2.display();
         this.scene.popMatrix();
 
@@ -93,12 +96,12 @@ class MyVehicle extends CGFobject {
 
     update(speed, angle) {
         this.updateAllwheels(speed, angle);
-        this.pissas += angle * speed;
-        this.x += speed * Math.cos(angle);
-        this.y += speed * Math.sin(angle);
-        this.xrot += speed;
-        this.zrot += speed;
+        this.rotacao += angle * speed; 
+        this.x += speed * Math.cos(this.rotacao);
+        this.z += speed * Math.sin(this.rotacao);
+
     }
+
 
 
 }

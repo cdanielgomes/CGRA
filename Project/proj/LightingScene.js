@@ -215,10 +215,14 @@ class LightingScene extends CGFscene {
 			this.vehicle.setNormal = false;
 
 		}
-		if (this.gui.isKeyPressed("KeyD")) {
+		
+		else if (this.gui.isKeyPressed("KeyD")) {
 
 			this.vehicle.moveRight();
 			this.vehicle.setNormal = false;
+		}
+		else{
+			this.vehicle.defaultMove();
 		}
 	}
 
