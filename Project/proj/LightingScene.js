@@ -51,7 +51,7 @@ class LightingScene extends CGFscene {
 
 		this.vehicle = new MyCar(this);
 		this.floor = new MyTerrain(this, 8, this.altimetry);
-		this.test = new MyTrapezio(this, 3, 1, 2);
+		this.test = new MyTronco(this);
 
 		// Materials
 		this.materialDefault = new CGFappearance(this);
@@ -186,17 +186,16 @@ class LightingScene extends CGFscene {
 
 		// ---- BEGIN Scene drawing section
 
-		//this.vehicle.display();
+		this.vehicle.display();
 
 
 		//	this.floor.display();
 
-		this.test.display();
+		//this.test.display();
 		// ---- END Scene drawing section
-	};
 
-	doSomething() {
-		console.log("Doing something...");
+		//define a quicker update time period than default
+		this.setUpdatePeriod(1000/60);
 	};
 
 	checkKeys() {

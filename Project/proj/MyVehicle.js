@@ -8,7 +8,7 @@ class MyVehicle extends CGFobject {
 
     constructor(scene) {
         super(scene);
-        this.tronco = new MyUnitCubeQuad(scene);
+        this.tronco = new MyTronco(scene);
         this.rightWheel = new MyWheel(scene);
         this.leftWheel = new MyWheel(scene);
         this.wheel = new MyWheel(scene);
@@ -26,6 +26,9 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
+
+        var deg = Math.PI / 180;
+
         this.scene.pushMatrix();
         this.scene.translate(-1.2, 0, 0);
         this.scene.pushMatrix();
@@ -34,20 +37,16 @@ class MyVehicle extends CGFobject {
         //tronco
         this.scene.pushMatrix();
         this.scene.translate(0 - this.x, 0.5, 0 + this.y);
-        this.scene.pushMatrix();
-        this.scene.scale(4, 1.2, 2);
-        this.scene.pushMatrix();
-        this.scene.translate(0, 0.3, 0);
+        this.scene.rotate(180*deg, 0, 1, 0)
         this.color.apply();
         this.tronco.display();
-        this.scene.popMatrix();
-        this.scene.popMatrix();
+        
         this.scene.popMatrix();
 
         //direita
 
         this.scene.pushMatrix();
-        this.scene.translate(this.x, 1,-2 + this.y);
+        this.scene.translate(-2.3 - this.x, 0.5,-0.7 + this.y);
 
         this.rightWheel.display();
         this.scene.popMatrix();
@@ -56,7 +55,7 @@ class MyVehicle extends CGFobject {
         //esquerda
 
         this.scene.pushMatrix();
-        this.scene.translate(-2.5 - this.x, 1, 2 + this.y);
+        this.scene.translate(-2.3 - this.x, 0.5, 1.2 + this.y);
 
         this.leftWheel.display();
         this.scene.popMatrix();
@@ -64,7 +63,7 @@ class MyVehicle extends CGFobject {
 
         //roda de tras
         this.scene.pushMatrix();
-        this.scene.translate(2 - this.x, 1, -2 + this.y);
+        this.scene.translate(1.9 - this.x, 0.5, -0.7 + this.y);
 
         this.wheel.display();
         this.scene.popMatrix();
@@ -73,11 +72,13 @@ class MyVehicle extends CGFobject {
         //roda de tras 
 
         this.scene.pushMatrix();
-        this.scene.translate(2 - this.x, 1, 2 + this.y);
+        this.scene.translate(1.9 - this.x, 0.5, 1.2 + this.y);
         this.wheel2.display();
         this.scene.popMatrix();
 
 
+
+        
         this.scene.popMatrix();
         this.scene.popMatrix();
     }
