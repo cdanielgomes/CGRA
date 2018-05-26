@@ -60,6 +60,12 @@ class MyCar extends CGFobject {
 
             this.turning = false;
             this.car.update(this.speed, this.wheelsAngle);
+
+            if(this.speed > 0){
+                this.speed -= 0.0025;
+            }else if(this.speed < 0){
+                this.speed += 0.0025;
+            }
         }
 
 
@@ -74,12 +80,12 @@ class MyCar extends CGFobject {
 
 
     moveForward() {
-        this.speed += 0.02;
+        this.speed += 0.01;
         this.update();
 
     }
     moveBack() {
-        this.speed -= 0.02;
+        this.speed -= 0.01;
         this.update();
 
     }
