@@ -18,7 +18,8 @@ class MyTronco extends CGFobject {
     this.paralamas = new MyTrapezio(scene, 4, 2 ,2);
     this.eixoTraseiro = new MyCylinder(scene, 50, 50);
     this.eixoDianteiro = new MyCylinder(scene, 50, 50);
-    
+    this.lampadaEsquerda = new MySemiSphere(scene, 50, 50);
+    this.lampadaDireita = new MySemiSphere(scene, 50, 50);
     }
 
     display(){
@@ -45,6 +46,21 @@ class MyTronco extends CGFobject {
     this.scene.translate(3.1, 0.4, 0);
     this.scene.scale(0.2,0.6,2);
     this.frente.display();
+    this.scene.popMatrix();
+
+
+    this.scene.pushMatrix();
+    this.scene.translate(3.2, 0.6, -0.6);
+    this.scene.scale(0.1,0.15,0.15);
+    this.scene.rotate(90*deg,0, 1, 0);
+    this.lampadaEsquerda.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    this.scene.translate(3.2, 0.6, 0.6);
+    this.scene.scale(0.1,0.15,0.15);
+    this.scene.rotate(90*deg,0, 1, 0);
+    this.lampadaDireita.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();

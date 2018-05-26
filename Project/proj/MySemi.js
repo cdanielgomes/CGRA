@@ -31,7 +31,7 @@ class MySemi extends CGFobject {
                 var x = Math.cos(ang * j) * Math.cos(angHor * i);
                 var y = Math.sin(ang * j) * Math.cos(angHor * i);
                 this.vertices.push(x, y, Math.sin(angHor * i));
-                this.normals.push(Math.cos(ang * j) * Math.cos(angHor * i), Math.sin(ang * j) * Math.cos(angHor * i), 0);
+                this.normals.push(x, y, Math.sin(angHor * i));
                 this.texCoords.push(x * 0.5 + 0.5, y * 0.5 + 0.5);
             }
             radiusTexture += incRadiusTexture;
