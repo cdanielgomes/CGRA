@@ -49,25 +49,18 @@ class LightingScene extends CGFscene {
 		this.crane = new MyCrane(this);
 		// Scene elements
 
-		this.vehicle = new MyCar(this);
+		this.vehicle = new MyVehicle(this);
 		this.floor = new MyTerrain(this, 8, this.altimetry);
-		this.test = new MyTronco(this);
+		this.test = new MyTrapezio(this, 4, 2, 2);
 
-		// Materials
-		this.materialDefault = new CGFappearance(this);
+		
 
-		this.materialA = new CGFappearance(this);
-		this.materialA.setAmbient(0.3, 0.3, 0.3, 1);
-		this.materialA.setDiffuse(0.8, 0.8, 0.8, 1);
-		this.materialA.setSpecular(0.0, 0.2, 0.8, 1);
-		this.materialA.setShininess(120);
+		//Textures
+		this.defaultTexture = new CGFappearance(this);
 
-		this.materialB = new CGFappearance(this);
-		this.materialB.setAmbient(0.3, 0.3, 0.3, 1);
-		this.materialB.setDiffuse(0.6, 0.6, 0.6, 1);
-		this.materialB.setSpecular(0.8, 0.8, 0.8, 1);
-		this.materialB.setShininess(120);
 
+		this.textureA = new CGFappearance(this);
+		this.textureA.loadTexture("../resources/images/model.png");
 
 		this.setUpdatePeriod(100);
 
@@ -78,8 +71,8 @@ class LightingScene extends CGFscene {
 	};
 
 	initLights() {
-		//this.setGlobalAmbientLight(0, 0, 0, 1.0);
-		this.setGlobalAmbientLight(0.5, 0.5, 0.5, 1.0);
+		this.setGlobalAmbientLight(1.0, 1.0, 1.0, 1.0);
+		//this.setGlobalAmbientLight(0.5, 0.5, 0.5, 1.0);
 		// Positions for four lights
 		this.lights[0].setPosition(4, 6, 1, 1);
 		//this.lights[0].setVisible(true); // show marker on light position (different from enabled)
@@ -178,7 +171,7 @@ class LightingScene extends CGFscene {
 		// Draw axis
 		//	
 
-		this.materialDefault.apply();
+		
 
 		//		this.crane.display();
 
@@ -186,8 +179,13 @@ class LightingScene extends CGFscene {
 
 		// ---- BEGIN Scene drawing section
 
-		this.vehicle.display();
 
+
+		this.pushMatrix();
+		this.textureA.apply();
+		this.vehicle.display();
+		this.popMatrix();
+		this.defaultTexture.apply();
 
 		//	this.floor.display();
 

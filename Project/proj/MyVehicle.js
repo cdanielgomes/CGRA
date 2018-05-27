@@ -18,8 +18,11 @@ class MyVehicle extends CGFobject {
         this.z = 0;
         this.angulo = -Math.PI/2;
         this.rotacao = 0;
-        this.color = new CGFappearance(this.scene);
-        //   this.color.setDiffuse(0.5, 0.5, 0.5, 1);
+        
+        this.wheelsAngle = 0;
+        this.turning = false;
+
+        this.speed = 0;
 
     }
 
@@ -31,9 +34,9 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(-this.x,0,this.z);
-        this.scene.translate(2.0, 0, 0);
+        this.scene.translate(2.1, 0, 0);
         this.scene.rotate(this.rotacao, 0, 1, 0);
-        this.scene.translate(-2.0, 0, 0);
+        this.scene.translate(-2.1, 0, 0);
         this.scene.pushMatrix();
 
         
@@ -41,8 +44,7 @@ class MyVehicle extends CGFobject {
         //tronco
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
-        this.scene.rotate(180*deg, 0, 1, 0)
-        this.color.apply();
+        this.scene.rotate(180*deg, 0, 1, 0);
         this.tronco.display();
         
         this.scene.popMatrix();
@@ -67,7 +69,7 @@ class MyVehicle extends CGFobject {
 
         //roda de tras
         this.scene.pushMatrix();
-        this.scene.translate(1.9, 0.5, -0.7);
+        this.scene.translate(2, 0.5, -0.7);
         this.wheel.display();
         this.scene.popMatrix();
 
@@ -75,7 +77,7 @@ class MyVehicle extends CGFobject {
         //roda de tras 
 
         this.scene.pushMatrix();
-        this.scene.translate(1.9, 0.5, 1.2);
+        this.scene.translate(2, 0.5, 1.2);
         this.wheel2.display();
         this.scene.popMatrix();
 
@@ -94,14 +96,87 @@ class MyVehicle extends CGFobject {
 
     }
 
-    update(speed, angle) {
+    updatepos(speed, angle) {
         this.updateAllwheels(speed, angle);
-        this.rotacao += angle * speed; 
+        if(Math.abs(speed)> 0.20){
+            this.rotacao += angle * speed * (1/(Math.abs(speed)/0.1)); 
+        }else{
+            this.rotacao += angle * speed; 
+        }
+        
         this.x += speed * Math.cos(this.rotacao);
         this.z += speed * Math.sin(this.rotacao);
 
     }
 
 
+
+    update() {
+
+            if (!this.turning & this.speed != 0) {
+                if (this.wheelsAngle > 0)
+                    this.wheelsAngle -= Math.PI / 12;
+                else if (this.wheelsAngle < 0)
+                    this.wheelsAngle += Math.PI / 12;
+
+            }
+
+            this.turning = false;
+            this.updatepos(this.speed, this.wheelsAngle);
+            
+            //atrito
+            /*
+            if(this.speed > 0){
+                this.speed -= 0.0025;
+                if(this.speed < 0){
+                    this.speed = 0;
+                }
+            }else if(this.speed < 0){
+                this.speed += 0.0025;
+                if(this.speed > 0){
+                    this.speed = 0;
+                }
+            }*/
+    }
+
+
+
+    moveForward() {
+        this.speed += 0.01;
+        if(this.speed > 0.55){
+            this.speed = 0.55;
+        }
+        this.update();
+
+    }
+    moveBack() {
+        this.speed -= 0.01;
+        if(this.speed < -0.55){
+            this.speed = -0.55;
+        }
+        this.update();
+
+    }
+
+
+    moveRight() {
+        this.wheelsAngle -= Math.PI /12;
+        if (this.wheelsAngle < -Math.PI / 6)
+            this.wheelsAngle = -Math.PI / 6;
+        this.turning = true;
+    }
+
+    moveLeft() {
+        this.wheelsAngle += Math.PI / 12;
+        if (this.wheelsAngle > Math.PI / 6)
+            this.wheelsAngle = Math.PI / 6;
+        this.turning = true;
+        
+
+    }
+
+    defaultMove(){
+        this.turning = false;
+    }
 
 }

@@ -24,6 +24,9 @@ serialInclude([
 	'MyPrismClosed.js',
 	'MyTrapezio.js',
 	'MyTronco.js',
+	'MyCubeVehicle.js',
+	'MyQuadVehicle.js',
+	'MyTrapezioBellow.js',
 	
 	main=function() {
 		var app = new CGFapplication(document.body);

@@ -17,6 +17,12 @@ class MyCrane extends CGFobject {
         this.tronco2 = new MyPrismClosed(scene, 4, 20);
         this.axisAngle = 0;
         this.baseAngle = 0;
+
+
+        this.carSpot = false;
+        this.gotCar = false;
+        this.CraneAxisAngle = 0;
+        this.CraneBaseAngle = 0;
     }
 
     display() {
@@ -91,5 +97,43 @@ class MyCrane extends CGFobject {
         this.baseAngle = baseAngle;
         this.axisAngle = axisAngle;
     }
+
+
+
+    update() {
+
+        if (this.carSpot) {
+            this.craneUpdate();
+        }
+    }
+
+
+       
+    craneUpdate() {
+
+        if (this.CraneAxisAngle < Math.PI / 4 && !this.gotCar) {
+            this.CraneAxisAngle += Math.PI / 32;
+
+            if (this.CraneAxisAngle == Math.PI / 4) {
+                this.gotCar = true;
+            }
+        }
+
+        if (this.gotCar) {
+            if (this.CraneAxisAngle > 0)
+                this.CraneAxisAngle -= Math.PI / 32;
+        }
+
+        if (this.CraneBaseAngle < Math.PI && this.gotCar && this.CraneAxisAngle == 0)
+            this.CraneBaseAngle += Math.PI / 36;
+
+
+
+        this.crane.setAngle(this.CraneBaseAngle, this.CraneAxisAngle);
+
+
+    }
+
+
 
 }
