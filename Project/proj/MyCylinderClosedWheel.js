@@ -1,10 +1,10 @@
 /**
- * MyCylinderClosed
+ * MyCylinderClosedWheel
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
 
-class MyCylinderClosed extends CGFobject {
+class MyCylinderClosedWheel extends CGFobject {
     constructor(scene, slices, stacks) {
         super(scene);
         this.cylinder = new MyCylinder(scene, slices, stacks);
@@ -13,16 +13,21 @@ class MyCylinderClosed extends CGFobject {
         this.top1.initBuffers();
         this.top2.initBuffers();
 
-        
+        this.tire = new CGFappearance(this.scene);
+        this.tire.loadTexture("../resources/images/tire.png");
+        this.raid = new CGFappearance(this.scene);
+        this.raid.loadTexture("../resources/images/raid.png");
     }
 
     display() {
         
+        this.tire.apply();
         this.cylinder.display();
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI, 1, 0, 0);
         
 
+        this.raid.apply();
         this.top1.display();
        
         this.scene.pushMatrix();

@@ -147,7 +147,6 @@ class MyTrapezioBellow extends CGFobject {
 		    0.483,0.063,
     ];
 
-        console.log(this.vertices);
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

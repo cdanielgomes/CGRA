@@ -32,6 +32,7 @@ class LightingScene extends CGFscene {
 		this.Light3 = true;
 		this.Light4 = true;
 		this.speed = 3;
+		this.Color = 'grey';
 
 		this.Axis = false;
 		this.altimetry = [[2.0, 3.0, 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0],
@@ -51,15 +52,25 @@ class LightingScene extends CGFscene {
 
 		this.vehicle = new MyVehicle(this);
 		this.floor = new MyTerrain(this, 8, this.altimetry);
-		this.test = new MyTrapezio(this, 4, 2, 2);
+		this.test = new MyCylinderClosed(this, 8, 2);
 
-
+		
 
 		//Textures
 		this.defaultTexture = new CGFappearance(this);
 
 
+		this.textureA = new CGFappearance(this);
+		this.textureA.loadTexture("../resources/images/molde.png");
 
+		this.textureB = new CGFappearance(this);
+		this.textureB.loadTexture("../resources/images/moldeB.png");
+
+		this.textureC = new CGFappearance(this);
+		this.textureC.loadTexture("../resources/images/moldeC.png");
+
+		this.currentTexture = new CGFappearance(this);
+		this.currentTexture = this.textureA;
 
 		this.setUpdatePeriod(100);
 
@@ -110,8 +121,6 @@ class LightingScene extends CGFscene {
 		this.lights[3].setQuadraticAttenuation(0.2);
 		this.lights[3].enable();
 
-
-
 	};
 
 	updateLights() {
@@ -146,6 +155,16 @@ class LightingScene extends CGFscene {
 
 	}
 
+	updateTexture(){
+		if(this.Color == 'grey'){
+			this.currentTexture = this.textureA;			  
+		}else if(this.Color == 'red'){
+			this.currentTexture = this.textureB;
+		}else if(this.Color == 'blue'){
+			this.currentTexture = this.textureC;
+		}
+	}
+
 
 	display() {
 
@@ -167,43 +186,43 @@ class LightingScene extends CGFscene {
 		// Update all lights used
 		this.updateLights();
 
+		this.updateTexture();
+
 		// Draw axis
 		//	
-		this.defaultTexture.apply();
 
+		
 
-		this.crane.display();
+		//		this.crane.display();
 
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
 
 
-
 		this.pushMatrix();
-
+		this.currentTexture.apply();
 		this.vehicle.display();
 		this.popMatrix();
-
-
-		//	this.floor.display();
-
+		
+		this.floor.display();
+		
 		//this.test.display();
 		// ---- END Scene drawing section
 
 		//define a quicker update time period than default
-		this.setUpdatePeriod(1000 / 60);
+		this.setUpdatePeriod(1000/60);
 	};
 
 	checkKeys() {
 		var text = "Keys pressed: ";
 		var keysPressed = false;
 		if (this.gui.isKeyPressed("KeyW")) {
-			this.vehicle.moveForward();
+			this.vehicle.moveForward(this.speed);
 
 		}
 		if (this.gui.isKeyPressed("KeyS")) {
-			this.vehicle.moveBack();
+			this.vehicle.moveBack(this.speed);
 
 		}
 		if (this.gui.isKeyPressed("KeyA")) {
@@ -212,13 +231,13 @@ class LightingScene extends CGFscene {
 			this.vehicle.setNormal = false;
 
 		}
-
+		
 		else if (this.gui.isKeyPressed("KeyD")) {
 
 			this.vehicle.moveRight();
 			this.vehicle.setNormal = false;
 		}
-		else {
+		else{
 			this.vehicle.defaultMove();
 		}
 	}
@@ -227,10 +246,7 @@ class LightingScene extends CGFscene {
 	update() {
 		this.checkKeys();
 		this.vehicle.update();
-		this.crane.update();
-		if (this.vehicle.getCoords()) {
-			this.vehicle.setCaught();
-		}
+		
 	}
-
+	
 };
