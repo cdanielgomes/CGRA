@@ -53,14 +53,13 @@ class LightingScene extends CGFscene {
 		this.floor = new MyTerrain(this, 8, this.altimetry);
 		this.test = new MyTrapezio(this, 4, 2, 2);
 
-		
+
 
 		//Textures
 		this.defaultTexture = new CGFappearance(this);
 
 
-		this.textureA = new CGFappearance(this);
-		this.textureA.loadTexture("../resources/images/model.png");
+
 
 		this.setUpdatePeriod(100);
 
@@ -170,10 +169,10 @@ class LightingScene extends CGFscene {
 
 		// Draw axis
 		//	
+		this.defaultTexture.apply();
 
-		
 
-		//		this.crane.display();
+		this.crane.display();
 
 		// ---- END Background, camera and axis setup
 
@@ -182,10 +181,10 @@ class LightingScene extends CGFscene {
 
 
 		this.pushMatrix();
-		this.textureA.apply();
+
 		this.vehicle.display();
 		this.popMatrix();
-		this.defaultTexture.apply();
+
 
 		//	this.floor.display();
 
@@ -193,7 +192,7 @@ class LightingScene extends CGFscene {
 		// ---- END Scene drawing section
 
 		//define a quicker update time period than default
-		this.setUpdatePeriod(1000/60);
+		this.setUpdatePeriod(1000 / 60);
 	};
 
 	checkKeys() {
@@ -213,13 +212,13 @@ class LightingScene extends CGFscene {
 			this.vehicle.setNormal = false;
 
 		}
-		
+
 		else if (this.gui.isKeyPressed("KeyD")) {
 
 			this.vehicle.moveRight();
 			this.vehicle.setNormal = false;
 		}
-		else{
+		else {
 			this.vehicle.defaultMove();
 		}
 	}
@@ -228,6 +227,10 @@ class LightingScene extends CGFscene {
 	update() {
 		this.checkKeys();
 		this.vehicle.update();
+		this.crane.update();
+		if (this.vehicle.getCoords()) {
+			this.vehicle.setCaught();
+		}
 	}
 
 };

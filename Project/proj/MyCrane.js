@@ -21,6 +21,8 @@ class MyCrane extends CGFobject {
 
         this.carSpot = false;
         this.gotCar = false;
+        this.releaseCar = false;
+        this.back = false;
         this.CraneAxisAngle = 0;
         this.CraneBaseAngle = 0;
     }
@@ -28,10 +30,10 @@ class MyCrane extends CGFobject {
     display() {
 
         this.scene.pushMatrix();
-        this.scene.rotate(this.baseAngle, 0,1,0);
-   
+        this.scene.rotate(this.baseAngle, 0, 1, 0);
+
         this.base.display();
-  
+
 
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI / 3, 1, 0, 0);
@@ -65,7 +67,7 @@ class MyCrane extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.35,-Math.sin(this.axisAngle)*4 + 0.2, Math.cos(this.axisAngle)*4) - 0.2;
+        this.scene.translate(0.35, -Math.sin(this.axisAngle) * 4 + 0.2, Math.cos(this.axisAngle) * 4) - 0.2;
 
         this.scene.pushMatrix();
         this.scene.translate(0, -2, 0);
@@ -108,32 +110,47 @@ class MyCrane extends CGFobject {
     }
 
 
-       
+
     craneUpdate() {
+        if (!this.back) {
+            if (this.CraneAxisAngle < Math.PI / 4 && !this.gotCar) {
+                this.CraneAxisAngle += Math.PI / 32;
 
-        if (this.CraneAxisAngle < Math.PI / 4 && !this.gotCar) {
-            this.CraneAxisAngle += Math.PI / 32;
-
-            if (this.CraneAxisAngle == Math.PI / 4) {
-                this.gotCar = true;
+                if (this.CraneAxisAngle == Math.PI / 4) {
+                    this.gotCar = true;
+                }
             }
+
+            if (this.gotCar) {
+                if (this.CraneAxisAngle > 0)
+                    this.CraneAxisAngle -= Math.PI / 32;
+            }
+
+            if (this.CraneBaseAngle < Math.PI && this.gotCar && this.CraneAxisAngle == 0)
+                this.CraneBaseAngle += Math.PI / 144;
+
+            if (Math.PI < this.CraneBaseAngle) {
+                this.releaseCar = true;
+                //update car position
+            }
+
         }
 
-        if (this.gotCar) {
-            if (this.CraneAxisAngle > 0)
-                this.CraneAxisAngle -= Math.PI / 32;
+        if (this.releaseCar) {
+            if (this.CraneBaseAngle > 0)
+                this.CraneBaseAngle -= Math.PI / 32;
+
+            if (this.CraneBaseAngle <= 0) {
+                this.CraneBaseAngle = 0;
+
+                this.carSpot = false;
+                this.gotCar = false;
+                this.releaseCar = false;
+                this.back = false;
+            }
+
         }
 
-        if (this.CraneBaseAngle < Math.PI && this.gotCar && this.CraneAxisAngle == 0)
-            this.CraneBaseAngle += Math.PI / 36;
-
-
-
-        this.crane.setAngle(this.CraneBaseAngle, this.CraneAxisAngle);
-
-
+        this.setAngle(this.CraneBaseAngle, this.CraneAxisAngle);
     }
-
-
-
 }
