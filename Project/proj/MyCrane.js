@@ -30,13 +30,13 @@ class MyCrane extends CGFobject {
 
     display() {
 
-
+    
 
         this.scene.pushMatrix();
-      this.scene.rotate(-Math.PI/2, 1, 0, 0);
-        
+        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+
         this.scene.pushMatrix();
-        this.scene.translate(0, -5.45,0 );
+        this.scene.translate(0, -5.45, 0);
         this.target.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
@@ -78,7 +78,7 @@ class MyCrane extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
-     
+
         this.scene.pushMatrix();
         this.scene.translate(0.35, -Math.sin(this.axisAngle) * 4 + 0.2, Math.cos(this.axisAngle) * 4 - 0.2);
 
@@ -170,15 +170,15 @@ class MyCrane extends CGFobject {
         this.setAngle(this.CraneBaseAngle, this.CraneAxisAngle);
     }
 
-    getStart(){
+    getStart() {
         return this.startCar;
     }
 
-    setSpot(bool){
+    setSpot(bool) {
         this.carSpot = bool;
     }
 
-    getMoving(){
-        return this.carSpot == false && this.gotCar == false && this.releaseCar == false && this.back ==false;
+    getMoving() {
+        return this.carSpot == false && this.gotCar == false && this.releaseCar == false && this.back == false;
     }
 }

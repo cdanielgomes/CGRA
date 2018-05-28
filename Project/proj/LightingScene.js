@@ -32,7 +32,7 @@ class LightingScene extends CGFscene {
 		this.Light3 = true;
 		this.Light4 = true;
 		this.speed = 3;
-
+		this.Color = 'grey';
 		this.moving = false;
 		this.Axis = false;
 		this.altimetry = [[2.0, 3.0, 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0],
@@ -60,7 +60,17 @@ class LightingScene extends CGFscene {
 		this.defaultTexture = new CGFappearance(this);
 
 
+		this.textureA = new CGFappearance(this);
+		this.textureA.loadTexture("../resources/images/molde.png");
 
+		this.textureB = new CGFappearance(this);
+		this.textureB.loadTexture("../resources/images/moldeB.png");
+
+		this.textureC = new CGFappearance(this);
+		this.textureC.loadTexture("../resources/images/moldeC.png");
+
+		this.currentTexture = new CGFappearance(this);
+		this.currentTexture = this.textureA;
 
 		this.setUpdatePeriod(100);
 
@@ -147,7 +157,15 @@ class LightingScene extends CGFscene {
 
 	}
 
-
+	updateTexture() {
+		if (this.Color == 'grey') {
+			this.currentTexture = this.textureA;
+		} else if (this.Color == 'red') {
+			this.currentTexture = this.textureB;
+		} else if (this.Color == 'blue') {
+			this.currentTexture = this.textureC;
+		}
+	}
 	display() {
 
 
@@ -245,10 +263,10 @@ class LightingScene extends CGFscene {
 			}
 		}
 
-		if(this.crane.getMoving()){
+		if (this.crane.getMoving()) {
 			this.moving = false;
 			this.kapa = 0;
-		} 
+		}
 	}
 
 };
