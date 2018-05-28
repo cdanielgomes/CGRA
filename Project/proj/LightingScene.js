@@ -184,6 +184,8 @@ class LightingScene extends CGFscene {
 		// Update all lights used
 		this.updateLights();
 
+
+		this.crane.display();
 		this.updateTexture();
 
 		// Draw axis
@@ -191,7 +193,6 @@ class LightingScene extends CGFscene {
 
 		
 
-		//		this.crane.display();
 
 		// ---- END Background, camera and axis setup
 

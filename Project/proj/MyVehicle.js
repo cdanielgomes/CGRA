@@ -271,7 +271,7 @@ class MyVehicle extends CGFobject {
     }
 
     getCoords() {
-        if (this.x >= -3 && this.x <= 3 && this.z < 7 && this.z > 3 && this.speed == 0)
+        if (this.x >= -3 && this.x <= 3 && this.z < 17 && this.z > 13 && this.speed == 0)
             return true;
         else
             return false;

@@ -30,6 +30,8 @@ class MyCrane extends CGFobject {
 
     display() {
 
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 10);
     
 
         this.scene.pushMatrix();
@@ -103,6 +105,7 @@ class MyCrane extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
+        this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
     }
