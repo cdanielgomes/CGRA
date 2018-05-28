@@ -80,7 +80,7 @@ class MyCrane extends CGFobject {
 
      
         this.scene.pushMatrix();
-        this.scene.translate(0.35, -Math.sin(this.axisAngle) * 4 + 0.2, Math.cos(this.axisAngle) * 4) - 0.2;
+        this.scene.translate(0.35, -Math.sin(this.axisAngle) * 4 + 0.2, Math.cos(this.axisAngle) * 4 - 0.2);
 
         this.scene.pushMatrix();
         this.scene.translate(0, -2, 0);

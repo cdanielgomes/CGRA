@@ -245,10 +245,10 @@ class LightingScene extends CGFscene {
 			}
 		}
 
-		/* if(this.crane.getMoving()){
+		if(this.crane.getMoving()){
 			this.moving = false;
 			this.kapa = 0;
-		} */
+		} 
 	}
 
 };

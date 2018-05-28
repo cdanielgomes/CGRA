@@ -55,7 +55,6 @@ class MyVehicle extends CGFobject {
         if (this.rotate) {
             this.scene.pushMatrix();
             this.scene.rotate(this.craneBaseRotate, 0, 1, 0);
-            //this.scene.translate(-this.tmpx, this.alt, this.tmpz);
         }
 
         this.scene.pushMatrix();
@@ -145,9 +144,6 @@ class MyVehicle extends CGFobject {
 
 
     update() {
-        console.log("x = " + this.x + "   z = " + this.z + "   s = " + this.speed);
-
-
         if (!this.caught) {
             if (!this.turning & this.speed != 0) {
                 if (this.wheelsAngle > 0)
@@ -250,16 +246,16 @@ class MyVehicle extends CGFobject {
 
             if (this.craneBaseRotate < Math.PI) {
                 this.craneBaseRotate += Math.PI / 144;
-                this.tmpx = Math.cos(this.craneBaseRotate) * 4;
-                this.tmpz = Math.sin(this.craneBaseRotate) * 4;
+                this.tmpz = Math.cos(this.craneBaseRotate) * 4 +0.2;
+                this.tmpx = Math.sin(this.craneBaseRotate) * 4 + 0.2;
             }
 
             if (this.craneBaseRotate >= Math.PI) {
                 this.craneBaseRotate = 0;
                 this.rotate = false;
                 this.down = true;
-                this.x = -this.x;
-                this.z = -this.z;
+                this.x = this.tmpx;
+                this.z = this.tmpz;
             }
         }
 
