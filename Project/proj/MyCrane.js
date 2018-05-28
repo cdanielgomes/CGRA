@@ -15,10 +15,11 @@ class MyCrane extends CGFobject {
         this.linha = new MyCylinderClosed(scene, 20, 20);
         this.tronco1 = new MyPrismClosed(scene, 4, 20);
         this.tronco2 = new MyPrismClosed(scene, 4, 20);
+        this.target = new MyTop(scene, 20);
         this.axisAngle = 0;
         this.baseAngle = 0;
 
-
+        this.startCar = false;
         this.carSpot = false;
         this.gotCar = false;
         this.releaseCar = false;
@@ -28,6 +29,17 @@ class MyCrane extends CGFobject {
     }
 
     display() {
+
+
+
+        this.scene.pushMatrix();
+      this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        
+        this.scene.pushMatrix();
+        this.scene.translate(0, -5.45,0 );
+        this.target.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.rotate(this.baseAngle, 0, 1, 0);
@@ -66,6 +78,7 @@ class MyCrane extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
+     
         this.scene.pushMatrix();
         this.scene.translate(0.35, -Math.sin(this.axisAngle) * 4 + 0.2, Math.cos(this.axisAngle) * 4) - 0.2;
 
@@ -124,6 +137,10 @@ class MyCrane extends CGFobject {
             if (this.gotCar) {
                 if (this.CraneAxisAngle > 0)
                     this.CraneAxisAngle -= Math.PI / 32;
+                else
+                    this.startCar = true;
+
+
             }
 
             if (this.CraneBaseAngle < Math.PI && this.gotCar && this.CraneAxisAngle == 0)
@@ -142,7 +159,6 @@ class MyCrane extends CGFobject {
 
             if (this.CraneBaseAngle <= 0) {
                 this.CraneBaseAngle = 0;
-
                 this.carSpot = false;
                 this.gotCar = false;
                 this.releaseCar = false;
@@ -152,5 +168,17 @@ class MyCrane extends CGFobject {
         }
 
         this.setAngle(this.CraneBaseAngle, this.CraneAxisAngle);
+    }
+
+    getStart(){
+        return this.startCar;
+    }
+
+    setSpot(bool){
+        this.carSpot = bool;
+    }
+
+    getMoving(){
+        return this.carSpot == false && this.gotCar == false && this.releaseCar == false && this.back ==false;
     }
 }

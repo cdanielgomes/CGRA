@@ -33,6 +33,7 @@ class LightingScene extends CGFscene {
 		this.Light4 = true;
 		this.speed = 3;
 
+		this.moving = false;
 		this.Axis = false;
 		this.altimetry = [[2.0, 3.0, 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0],
 		[2.0, 3.0, 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0],
@@ -53,7 +54,7 @@ class LightingScene extends CGFscene {
 		this.floor = new MyTerrain(this, 8, this.altimetry);
 		this.test = new MyTrapezio(this, 4, 2, 2);
 
-
+		this.kapa = 0;
 
 		//Textures
 		this.defaultTexture = new CGFappearance(this);
@@ -228,9 +229,26 @@ class LightingScene extends CGFscene {
 		this.checkKeys();
 		this.vehicle.update();
 		this.crane.update();
+
 		if (this.vehicle.getCoords()) {
-			this.vehicle.setCaught();
+			this.moving = true;
+
 		}
+
+		if (this.moving) {
+			if (this.kapa == 0) {
+				this.crane.setSpot(true);
+				if (this.crane.getStart()) {
+					this.vehicle.setCaught();
+					this.kapa += 1;
+				}
+			}
+		}
+
+		/* if(this.crane.getMoving()){
+			this.moving = false;
+			this.kapa = 0;
+		} */
 	}
 
 };

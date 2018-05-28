@@ -24,12 +24,15 @@ class MyVehicle extends CGFobject {
         this.craneBaseRotate = 0;
         this.wheelsAngle = 0;
         this.turning = false;
-        this.caught = true;
+        this.caught = false;
         this.up = false;
         this.speed = 0;
         this.down = false;
         this.rotate = false;
         this.alt = 0;
+
+        this.tmpx = 0;
+        this.tmpz = 0;
     }
 
     display() {
@@ -40,18 +43,19 @@ class MyVehicle extends CGFobject {
 
         if (this.down) {
             this.scene.pushMatrix();
-            this.scene.translate(0, this.alt, 0);
+            this.scene.translate(-this.tmpx, this.alt, this.tmpz);
         }
 
         if (this.up) {
             this.scene.pushMatrix();
-            this.scene.translate(0, Math.cos(this.craneAxisRotate), 0);
-            this.alt = Math.cos(this.craneAxisRotate);
+            this.scene.translate(0, this.alt, 0);
+
         }
 
-        if (this.caught) {
+        if (this.rotate) {
             this.scene.pushMatrix();
-            this.scene.rotate(this.craneRotate, 0, 1, 0);
+            this.scene.rotate(this.craneBaseRotate, 0, 1, 0);
+            //this.scene.translate(-this.tmpx, this.alt, this.tmpz);
         }
 
         this.scene.pushMatrix();
@@ -109,7 +113,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
-        if (this.caught)
+        if (this.rotate)
             this.scene.popMatrix();
         if (this.up)
             this.scene.popMatrix();
@@ -141,6 +145,9 @@ class MyVehicle extends CGFobject {
 
 
     update() {
+        console.log("x = " + this.x + "   z = " + this.z + "   s = " + this.speed);
+
+
         if (!this.caught) {
             if (!this.turning & this.speed != 0) {
                 if (this.wheelsAngle > 0)
@@ -150,11 +157,12 @@ class MyVehicle extends CGFobject {
 
             }
             this.turning = false;
+            if (this.speed < 1.3455678654 * Math.pow(10, -15) && this.speed > -1.3455678654 * Math.pow(10, -15))
+                this.speed = 0;
             this.updatepos(this.speed, this.wheelsAngle);
         }
 
         if (this.caught) {
-            this.up = true;
             this.followCrane();
         }
 
@@ -204,19 +212,29 @@ class MyVehicle extends CGFobject {
     }
 
     downCar() {
+
+
         if (this.alt > 0)
             this.alt -= 0.2;
         if (this.alt <= 0) {
             this.alt = 0;
             this.down = false;
             this.caught = false;
+
+
         }
+
+
 
     }
 
     upCar() {
-        if (this.CraneAxisAngle < Math.PI / 4)
+
+
+        if (this.craneAxisRotate < Math.PI / 4) {
             this.craneAxisRotate += Math.PI / 32;
+            this.alt = Math.cos(this.craneAxisRotate) * 4;
+        }
         else {
             this.up = false;
             this.rotate = true;
@@ -224,17 +242,24 @@ class MyVehicle extends CGFobject {
     }
 
     followCrane() {
+
         if (this.up)
             this.upCar();
 
         if (this.rotate) {
-            if (this.craneRotate < Math.PI) {
-                this.craneRotate += Math.PI / 144;
+
+            if (this.craneBaseRotate < Math.PI) {
+                this.craneBaseRotate += Math.PI / 144;
+                this.tmpx = Math.cos(this.craneBaseRotate) * 4;
+                this.tmpz = Math.sin(this.craneBaseRotate) * 4;
             }
 
-            else {
+            if (this.craneBaseRotate >= Math.PI) {
                 this.craneBaseRotate = 0;
+                this.rotate = false;
                 this.down = true;
+                this.x = -this.x;
+                this.z = -this.z;
             }
         }
 
@@ -246,10 +271,11 @@ class MyVehicle extends CGFobject {
 
     setCaught() {
         this.caught = true;
+        this.up = true;
     }
 
     getCoords() {
-        if (this.x  >= -1 && this.x<=1 && this.z < 2 && this.z >0)
+        if (this.x >= -3 && this.x <= 3 && this.z < 7 && this.z > 3 && this.speed == 0)
             return true;
         else
             return false;
