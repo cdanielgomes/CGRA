@@ -32,7 +32,7 @@ class MySemi extends CGFobject {
                 var y = Math.sin(ang * j) * Math.cos(angHor * i);
                 this.vertices.push(x, y, Math.sin(angHor * i));
                 this.normals.push(x, y, Math.sin(angHor * i));
-                this.texCoords.push(x * 0.5 + 0.5, y * 0.5 + 0.5);
+                this.texCoords.push(0.115,0.791);
             }
             radiusTexture += incRadiusTexture;
 
@@ -48,7 +48,7 @@ class MySemi extends CGFobject {
             this.indices.push(i * this.slices, i * this.slices + this.slices, (i + 1) * this.slices + this.slices - 1);
         }
 
-
+        
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

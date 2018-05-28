@@ -6,12 +6,15 @@
 
 class MyCylinder extends CGFobject {
 
-    constructor(scene, slices, stacks) {
-        super(scene);
-        this.slices = slices;
-        this.stacks = stacks;
-        this.initBuffers();
-    }
+    constructor(scene, slices, stacks){
+		
+		super(scene);
+		this.slices = slices;
+		this.stacks = stacks;
+
+		this.initBuffers();
+
+	}
 
 
 
@@ -19,8 +22,14 @@ class MyCylinder extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
-        this.primitiveType = this.scene.gl.TRIANGLES;
+
+        
+        
+
+        /*
+        //vertices estao duplicados
 
 
         var ang = 2 * Math.PI / this.slices;
@@ -84,13 +93,42 @@ class MyCylinder extends CGFobject {
                 this.indices.push(i + 1);
 
 
-        }
+        }*/
 
 
 
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
-    
+	
+		var ang = 2*Math.PI/this.slices;
 
-    };
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
+
+		for (var j = 0; j < this.stacks; j++)
+		{
+			for (var i = 0; i < this.slices; i++)
+			{
+				this.vertices.push(Math.cos(ang*i), Math.sin(ang*i), j/this.stacks );				// A
+				this.vertices.push(Math.cos(ang*i), Math.sin(ang*i),  (j+1)/this.stacks);			// B
+
+				this.indices.push((0 + 2*i)%(this.slices*2) + j*this.slices*2); this.indices.push((2 + 2*i)%(this.slices*2) + j*this.slices*2); this.indices.push((1 + 2*i)%(this.slices*2) + j*this.slices*2); // ACB
+				this.indices.push((1 + 2*i)%(this.slices*2) + j*this.slices*2); this.indices.push((2 + 2*i)%(this.slices*2) + j*this.slices*2); this.indices.push((3 + 2*i)%(this.slices*2) + j*this.slices*2); // BCD
+
+				this.normals.push(Math.cos(ang*i), Math.sin(ang*i), 0);
+				this.normals.push(Math.cos(ang*i), Math.sin(ang*i), 0);
+
+				var angle = ang*i;
+				var strip = ang/(2*Math.PI);
+
+				this.texCoords.push(j/this.stacks, ang*i/(2*Math.PI));
+				this.texCoords.push((j+1)/this.stacks, ang*i/(2*Math.PI));
+
+			}
+		}
+
+
+		this.primitiveType=this.scene.gl.TRIANGLES;
+		this.initGLBuffers();
+	}
 };
