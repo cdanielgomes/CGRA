@@ -38,7 +38,7 @@ class MyVehicle extends CGFobject {
     display() {
 
         var deg = Math.PI / 180;
-
+      
 
 
         if (this.down) {
@@ -144,6 +144,7 @@ class MyVehicle extends CGFobject {
 
 
     update() {
+        console.log("x = " + this.x + " y = " + this.z);
         if (!this.caught) {
             if (!this.turning & this.speed != 0) {
                 if (this.wheelsAngle > 0)
@@ -271,7 +272,7 @@ class MyVehicle extends CGFobject {
     }
 
     getCoords() {
-        if (this.x >= -3 && this.x <= 3 && this.z < 17 && this.z > 13 && this.speed == 0)
+        if (this.x >= -3 && this.x <= 3 && this.z < 7 && this.z > 4 && this.speed == 0)
             return true;
         else
             return false;

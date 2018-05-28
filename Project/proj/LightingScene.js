@@ -149,7 +149,7 @@ class LightingScene extends CGFscene {
 			this.lights[3].disable();
 
 
-		if (!this.Axis) {
+		if (this.Axis) {
 			this.axis.display();
 		}
 
@@ -184,14 +184,14 @@ class LightingScene extends CGFscene {
 		// Update all lights used
 		this.updateLights();
 
-
+		this.defaultTexture.apply();
 		this.crane.display();
 		this.updateTexture();
 
 		// Draw axis
 		//	
 
-		
+
 
 
 		// ---- END Background, camera and axis setup
@@ -203,14 +203,14 @@ class LightingScene extends CGFscene {
 		this.currentTexture.apply();
 		this.vehicle.display();
 		this.popMatrix();
-		
+
 		this.floor.display();
-		
+
 		//this.test.display();
 		// ---- END Scene drawing section
 
 		//define a quicker update time period than default
-		this.setUpdatePeriod(1000/60);
+		this.setUpdatePeriod(1000 / 60);
 	};
 
 	checkKeys() {
@@ -230,13 +230,13 @@ class LightingScene extends CGFscene {
 			this.vehicle.setNormal = false;
 
 		}
-		
+
 		else if (this.gui.isKeyPressed("KeyD")) {
 
 			this.vehicle.moveRight();
 			this.vehicle.setNormal = false;
 		}
-		else{
+		else {
 			this.vehicle.defaultMove();
 		}
 	}
@@ -267,5 +267,5 @@ class LightingScene extends CGFscene {
 			this.kapa = 0;
 		}
 	}
-	
+
 };
