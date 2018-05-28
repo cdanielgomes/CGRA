@@ -12,13 +12,16 @@ class MyCylinderClosed extends CGFobject {
         this.top2 = new MyTop(scene, slices);
         this.top1.initBuffers();
         this.top2.initBuffers();
+
+        
     }
 
     display() {
-
+        
         this.cylinder.display();
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI, 1, 0, 0);
+        
 
         this.top1.display();
        

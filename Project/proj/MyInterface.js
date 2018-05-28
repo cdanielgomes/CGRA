@@ -46,11 +46,14 @@ class MyInterface extends CGFinterface {
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		this.gui.add(this.scene, 'speed', -5, 5);
+		this.gui.add(this.scene, 'speed', 1, 5);
 
 		//add the button to enable or disable the axis
 
 		this.gui.add(this.scene, 'Axis');
+
+		//add the car skins drop-down
+		this.gui.add(this.scene, 'Color', [ 'grey', 'red', 'blue' ] );
 		
 		this.initKeys();
 		return true;
